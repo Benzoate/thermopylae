@@ -3,5 +3,5 @@ from temperature import views
 
 urlpatterns = patterns(
     '',
-    url(r'^(?P<sensor_name>\w+})/$', views.temperature),
+    url(r'^(?P<sensor_name>\w+)/$', views.temperature),
 )
