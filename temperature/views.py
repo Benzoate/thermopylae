@@ -7,8 +7,7 @@ import datetime
 from temperature import models
 
 
-# Create your views here.
-def update(request):
+def update_temperatures():
     sensors = models.Thermocouple.objects.values()
     r = requests.get('http://aaronlockton.com/xrf.txt')
     lines = r.text.split('\n')
@@ -36,7 +35,12 @@ def update(request):
                 new_reading.date = ndate
                 new_reading.save()
                 num_new_readings = num_new_readings + 1
-    return HttpResponse(num_new_readings)
+    return num_new_readings
+
+
+# Create your views here.
+def update(request):
+    return HttpResponse(update_temperatures())
 
 
 def temperature(request, sensor_name):
