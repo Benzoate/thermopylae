@@ -49,6 +49,6 @@ def temperature(request, sensor_name):
     except models.Thermocouple.DoesNotExist:
         return HttpResponse('sensor not defined', status=404)
     reading = (models.Reading.objects.filter(thermocouple=sensor).
-               order_by('date').values()[0])
+               order_by('-date').values()[0])
     reading['date'] = reading['date'].isoformat()
     return HttpResponse(json.dumps(reading))
