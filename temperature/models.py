@@ -6,6 +6,11 @@ class Thermocouple(models.Model):
     name = models.TextField()
     short_name = models.TextField()
 
+    def latest_reading(self):
+        reading = (Reading.objects.filter(thermocouple=self)
+                   .order_by('-date').values()[0])
+        return reading
+
     def __unicode__(self):
         return '%s(%s)' % (self.name, self.short_name)
 

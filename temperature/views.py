@@ -8,7 +8,12 @@ from temperature import models
 
 
 def view_all(request):
-    return render(request, 'temperature_index.html')
+    sensors = models.Thermocouple.objects.order_by('name').all()
+    sensor_readings = map(lambda x: {'sensor': x,
+                                     'reading': x.latest_reading(),
+                                     'angle': 12}, sensors)
+    context_dict = {'sensor_readings': sensor_readings}
+    return render(request, 'temperature_index.html', context_dict)
 
 
 def update_temperatures():

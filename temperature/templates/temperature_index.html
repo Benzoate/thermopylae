@@ -10,21 +10,37 @@
             from { -webkit-transform: rotate(-85deg);}
             to {-webkit-transform: rotate(85deg);}
         }
+        h1{
+            font-weight: 100;
+            font-size: 4em;
+            line-height: 0.5em;
+            margin-top: 0.5em;
+        }
         .needle{
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background-size: cover;
+            background-image: url('{% static "temperature_dash_needle.png" %}');
             transform: rotate(45deg);
-            transform-origin: 20% 40%;    
+            transform-origin: 50% 97%;
             -webkit-transform: rotate(85deg); /* Chrome, Safari, Opera */
             -webkit-transform-origin: 50% 97%; /* Chrome, Safari, Opera */
-            -webkit-animation: myfirst 15s; /* Chrome, Safari, Opera */
+            /*-webkit-animation: myfirst 15s;
             -webkit-animation-iteration-count: infinite;
-            -webkit-animation-direction: alternate;
+            -webkit-animation-direction: alternate;*/
         }
         </style>
     </head>
     <body>
-        <section style="width: 40em; height: 20em;margin: 0 auto; background-size: cover;background-image: url('{% static "temperature_dash_back.png" %}');text-align: center; position: relative; ">
-            <section class="needle" style="width: 100%; height: 100%; position: absolute;background-size: cover; background-image: url('{% static "temperature_dash_needle.png" %}')"></section>
-            <section style="background: white; margin-left:-1em; width: 2em; position: absolute;bottom: -2px;left: 50%; right: auto;font-size: 7.2em;font-weight:200;vertical-align: bottom; border: 1px solid; border-top-left-radius: 1em; border-top-right-radius: 1em; border-color: transparent;">88</section>
+        {% for sr in sensor_readings %}
+        <section style="text-align: center;margin-bottom: 8em;">
+            <h1>{{sr.sensor.name}}</h1>
+            <section style="width: 40em; height: 20em;margin: 0 auto; background-size: cover;background-image: url('{% static "temperature_dash_back.png" %}');text-align: center; position: relative; ">
+                <section class="needle" style="-webkit-transform: rotate({{sr.angle}}deg)"></section>
+                <section style="background: white; margin-left:-1em; width: 2em; position: absolute;bottom: -2px;left: 50%; right: auto;font-size: 7.2em;font-weight:200;vertical-align: bottom; border: 1px solid; border-top-left-radius: 1em; border-top-right-radius: 1em; border-color: transparent;">{{sr.reading.value|floatformat:0}}<small>c</small></section>
+            </section>
         </section>
+        {% endfor %}
     </body>
 </html>
