@@ -1,0 +1,31 @@
+{% load staticfiles %}
+<html>
+    <head>
+        <title>Aaron Lockton Mirracle Temperature Viewer</title>
+        <style type="text/css">
+        body{
+            font-family: 'Helvetica Neue';
+            width: 10em;
+        }
+        @-webkit-keyframes myfirst {
+            from { -webkit-transform: rotate(-85deg);}
+            to {-webkit-transform: rotate(85deg);}
+        }
+        .needle{
+            transform: rotate(45deg);
+            transform-origin: 20% 40%;    
+            -webkit-transform: rotate(85deg); /* Chrome, Safari, Opera */
+            -webkit-transform-origin: 50% 97%; /* Chrome, Safari, Opera */
+            -webkit-animation: myfirst 15s; /* Chrome, Safari, Opera */
+            -webkit-animation-iteration-count: infinite;
+            -webkit-animation-direction: alternate;
+        }
+        </style>
+    </head>
+    <body>
+        <section style="width: 10em; height: 5em;background-size: cover;background-image: url('{% static "temperature_dash_back.png" %}');text-align: center; position: relative; ">
+            <section class="needle" style="width: 100%; height: 100%; position: absolute;background-size: cover; background-image: url('{% static "temperature_dash_needle.png" %}')"></section>
+            <section style="background: white; margin-left:-1em; width: 2em; position: absolute;bottom: -2px;left: 50%; right: auto;font-size: 1.8em;font-weight:200;vertical-align: bottom; border: 1px solid; border-top-left-radius: 1em; border-top-right-radius: 1em; border-color: transparent;">88</section>
+        </section>
+    </body>
+</html>

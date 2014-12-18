@@ -7,6 +7,10 @@ import datetime
 from temperature import models
 
 
+def view_all(request):
+    return render(request, 'temperature_index.html')
+
+
 def update_temperatures():
     sensors = models.Thermocouple.objects.values()
     r = requests.get('http://aaronlockton.com/xrf.txt')
