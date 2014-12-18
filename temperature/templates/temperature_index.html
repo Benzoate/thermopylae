@@ -5,7 +5,6 @@
         <style type="text/css">
         body{
             font-family: 'Helvetica Neue';
-            width: 10em;
         }
         @-webkit-keyframes myfirst {
             from { -webkit-transform: rotate(-85deg);}
@@ -23,9 +22,9 @@
         </style>
     </head>
     <body>
-        <section style="width: 10em; height: 5em;background-size: cover;background-image: url('{% static "temperature_dash_back.png" %}');text-align: center; position: relative; ">
+        <section style="width: 40em; height: 20em;background-size: cover;background-image: url('{% static "temperature_dash_back.png" %}');text-align: center; position: relative; ">
             <section class="needle" style="width: 100%; height: 100%; position: absolute;background-size: cover; background-image: url('{% static "temperature_dash_needle.png" %}')"></section>
-            <section style="background: white; margin-left:-1em; width: 2em; position: absolute;bottom: -2px;left: 50%; right: auto;font-size: 1.8em;font-weight:200;vertical-align: bottom; border: 1px solid; border-top-left-radius: 1em; border-top-right-radius: 1em; border-color: transparent;">88</section>
+            <section style="background: white; margin-left:-1em; width: 2em; position: absolute;bottom: -2px;left: 50%; right: auto;font-size: 7.2em;font-weight:200;vertical-align: bottom; border: 1px solid; border-top-left-radius: 1em; border-top-right-radius: 1em; border-color: transparent;">88</section>
         </section>
     </body>
 </html>
