@@ -5,6 +5,7 @@
         <style type="text/css">
         body{
             font-family: 'Helvetica Neue';
+            text-align: center;
         }
         @-webkit-keyframes myfirst {
             from { -webkit-transform: rotate(-85deg);}
@@ -30,17 +31,67 @@
             -webkit-animation-iteration-count: infinite;
             -webkit-animation-direction: alternate;*/
         }
+        table{
+            text-align: center;
+            margin: 0 auto;
+            font-size: 1.5em;
+        }
+        table th{
+            font-weight: normal;
+            padding-right: 1em;
+        }
+        table td.left{
+            padding: 0 1em;
+        }
+        table h1{
+            font-size: 5em;
+        }
+        table table td{
+            padding: 0.5em 0;
+        }
+        hr{
+            margin: 4em;
+        }
         </style>
     </head>
     <body>
-        {% for sr in sensor_readings %}
-        <section style="text-align: center;margin-bottom: 8em;">
+        {% with sr=sensor_readings.0  %}
+        <section style="text-align: center;">
             <h1>{{sr.sensor.name}}</h1>
-            <section style="width: 40em; height: 20em;margin: 0 auto; background-size: cover;background-image: url('{% static "temperature_dash_back.png" %}');text-align: center; position: relative; ">
+            <section style="width: 30em; height: 15em;margin: 0 auto; background-size: cover;background-image: url('{% static "temperature_dash_back.png" %}');text-align: center; position: relative; ">
                 <section class="needle" style="-webkit-transform: rotate({{sr.angle}}deg)"></section>
-                <section style="background: white; margin-left:-1em; width: 2em; position: absolute;bottom: -2px;left: 50%; right: auto;font-size: 7.2em;font-weight:200;vertical-align: bottom; border: 1px solid; border-top-left-radius: 1em; border-top-right-radius: 1em; border-color: transparent;">{{sr.reading.value|floatformat:0}}<small>c</small></section>
+                <section style="background: white; margin-left:-1em; width: 2em; position: absolute;bottom: -2px;left: 50%; right: auto;font-size: 5.4em;font-weight:200;vertical-align: bottom; border: 1px solid; border-top-left-radius: 1em; border-top-right-radius: 1em; border-color: transparent;">{{sr.reading.value|floatformat:0}}<small>c</small></section>
             </section>
         </section>
+        {% endwith %}
+        <hr />
+        <table>
+            <tbody>
+        {% for sr in sensor_readings %}
+                <tr>
+                    <td class="left">
+                        {{sr.sensor.name}}
+                        <h1>
+                            {{sr.reading.value|floatformat:0}}<small>c</small>
+                        </h1>
+                    </td>
+                    <td>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>High</th>
+                                    <td>{{sr.max}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Low</th>
+                                    <td>{{sr.min}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
         {% endfor %}
+            </tbody>
+        </table>
     </body>
 </html>
