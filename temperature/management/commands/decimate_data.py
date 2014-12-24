@@ -15,7 +15,7 @@ class Command(BaseCommand):
             therms = models.Thermocouple.objects.all()
             for therm in therms:
                 print 'on thermocouple: %s' % therm
-                current = datetime.date.today() - datetime.timedelta(days=7)
+                current = datetime.date.today() - datetime.timedelta(days=2)
                 readings = list(models.Reading.objects.filter(date__lt=current,
                                                               thermocouple=therm)
                                 .order_by('-date').all())
