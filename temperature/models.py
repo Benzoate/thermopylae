@@ -45,3 +45,6 @@ class CollatedReading(models.Model):
     min = models.FloatField()
     max = models.FloatField()
     mean = models.FloatField()
+
+    def __unicode__(self):
+        return '%sc.%sc.%sc - %s' % (self.min, self.mean, self.max, self.date)
