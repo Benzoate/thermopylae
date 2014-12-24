@@ -10,3 +10,8 @@ class ThermocoupleAdmin(admin.ModelAdmin):
 @admin.register(models.Reading)
 class ReadingAdmin(admin.ModelAdmin):
     pass
+
+
+@admin.register(models.CollatedReading)
+class CollatedReadingAdmin(admin.ModelAdmin):
+    pass
