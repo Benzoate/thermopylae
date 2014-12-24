@@ -37,3 +37,11 @@ class Reading(models.Model):
 
     def __unicode__(self):
         return '%s - %sc' % (self.date, self.value)
+
+
+class CollatedReading(models.Model):
+    date = models.DateField()
+    thermocouple = models.ForeignKey(Thermocouple)
+    min = models.FloatField()
+    max = models.FloatField()
+    mean = models.FloatField()
