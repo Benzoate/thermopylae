@@ -13,6 +13,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         therms = models.Thermocouple.objects.all()
         for therm in therms:
+            print 'on thermocouple: %s' % therm
             current = datetime.date.today() - datetime.timedelta(days=7)
             readings = list(models.Reading.objects.filter(date__lt=current,
                                                           thermocouple=therm)
