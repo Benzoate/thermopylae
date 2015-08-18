@@ -14,9 +14,10 @@
         }
         body{
             font-family: 'Helvetica Neue';
-            text-align: center;
-            font-size: 1em;
+            font-size: 0.3em;
             overflow-x: hidden;
+            margin: 0;
+            padding: 0;
         }
         html *{
             padding: 0;
@@ -26,35 +27,57 @@
             margin: 0;
             padding: 0;
         }
+        .background{
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+        .hot-background{
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffc8c8+100 */
+            background: rgb(255,255,255); /* Old browsers */
+            background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(255,200,200,1) 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(255,200,200,1))); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,200,200,1) 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,200,200,1) 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(255,200,200,1) 100%); /* IE10+ */
+            background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(255,200,200,1) 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ffc8c8',GradientType=0 ); /* IE6-9 */
+            z-index: -2;
+        }
+        .cold-background{
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,c8ecff+100 */
+            background: rgb(255,255,255); /* Old browsers */
+            background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(200,236,255,1) 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(200,236,255,1))); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(200,236,255,1) 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(200,236,255,1) 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(200,236,255,1) 100%); /* IE10+ */
+            background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(200,236,255,1) 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#c8ecff',GradientType=0 ); /* IE6-9 */
+            z-index: -1;
+        }
         h1{
             font-weight: 100;
-            font-size: 4em;
-            line-height: 0.5em;
-            margin-top: 0.5em;
-            margin-bottom: 0.5em;
+            font-size: 48pt;
+            margin: 0;
         }
-        .needle{
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            background-size: cover;
-            background-image: url('{% static "temperature_dash_needle.png" %}');
-            transform: rotate(45deg);
-            transform-origin: 50% 97%;
-            -webkit-transform: rotate(85deg); /* Chrome, Safari, Opera */
-            -webkit-transform-origin: 50% 97%; /* Chrome, Safari, Opera */
-            /*-webkit-animation: myfirst 15s;
-            -webkit-animation-iteration-count: infinite;
-            -webkit-animation-direction: alternate;*/
+        h2{
+            font-size: 36pt;
+            font-weight: 100;
+            text-align: right;
+            vertical-align: top;
         }
         table{
-            text-align: center;
             margin: 0;
             font-size: 1em;
-            width: calc(100% - 2.5em);
-            margin: 2em 1em;
-            border-top: solid black 1px;
+            width: 100%;
+            margin: 2em 0;
             padding-top: 1em;
+        }
+        table > tbody > tr > td{
+            padding-left: 1em;
         }
         table table{
             border-top: solid transparent 0px;
@@ -63,50 +86,57 @@
         table th{
             font-weight: normal;
         }
-        table td.left{
+        .sensor-reading{
+            width: 50%;
+            vertical-align: middle;
+            padding: 0;
+            padding-bottom: 3em;
         }
-        table h1{
-            font-size: 5em;
-            margin-top: 0.3em;
+        .sensor-reading table{
+            height: 100%;
         }
-        table table td{
+        .high-low-temp, .high-low-temp *{
+            margin: 0;
+            padding: 0;
+            vertical-align: middle;
         }
-        hr{
-            margin: 4em;
+        .high-temp, .low-temp{
+            font-size: 12pt;
+            font-weight: 300;
+            padding-left: 0.5em;
         }
         </style>
     </head>
     <body>
-        {% with sr=sensor_readings.0  %}
-        
-        <section><h1>{{sr.sensor.name}}</h1>
-            <section class="dialthing" style="width: 480px; height: 240px; background-size: cover;background-image: url('{% static "temperature_dash_back.png" %}'); position: relative; ">
-                <section class="needle" style="-webkit-transform: rotate({{sr.angle}}deg)"></section>
-                <section style="background: white; margin-left:-20%; width: 40%; position: absolute;bottom: -2px;left: 50%; right: auto;font-size: 4.4em;font-weight:200;vertical-align: bottom; border: 1px solid; border-top-left-radius: 1em; border-top-right-radius: 1em; border-color: transparent;">{{sr.reading.value|floatformat:0}}<small>c</small></section>
-            </section>
+        <section class="background hot-background">
+            
         </section>
-        {% endwith %}
-        {# <hr /> #}
+
+        <section class="background cold-background" style="opacity: {{blue_opacity}};">
+            
+        </section>
         <table>
             <tbody>
         {% for sr in sensor_readings %}
-                <tr>
-                    <td class="left">
-                        {{sr.sensor.name}}
-                        <h1 style="">
-                            {{sr.reading.value|floatformat:0}}<small>c</small>
-                        </h1>
+                <tr class="sensor-name">
+                    <td colspan="2">
+                        <h1>{{sr.sensor.name}}</h1>
                     </td>
-                    <td class=>
-                        <table>
+                </tr>
+                <tr>
+                    <td class="sensor-reading">
+                        <h2>
+                            {{sr.reading.value|floatformat:0}}º
+                        </h2>
+                    </td>
+                    <td class="sensor-reading">
+                        <table class="high-low-temp">
                             <tbody>
                                 <tr>
-                                    <th>High</th>
-                                    <td>{{sr.max}}</td>
+                                    <td class="high-temp">{{sr.max}}º</td>
                                 </tr>
                                 <tr>
-                                    <th>Low</th>
-                                    <td>{{sr.min}}</td>
+                                    <td class="low-temp">{{sr.min}}º</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -116,8 +146,7 @@
             </tbody>
         </table>
         <script>
-        $('.dialthing').css('width', $('body').width() + 'px');
-        $('.dialthing').css('height', ($('body').width()/2) + 'px');
+
         </script>
     </body>
 </html>
