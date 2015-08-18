@@ -15,7 +15,7 @@ def view_all(request):
                                      'max': x.day_max(),
                                      'min': x.day_min(),
                                      'angle': 12}, sensors)
-    blue_opacity = (min(max(14, sensor_readings[0]['reading']['value']), 22) - 14) / 8.0
+    blue_opacity = 1.0 - (min(max(14, sensor_readings[0]['reading']['value']), 22) - 14) / 8.0
     context_dict = {
         'sensor_readings': sensor_readings,
         'blue_opacity': blue_opacity
